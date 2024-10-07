@@ -25,6 +25,7 @@ public static class CommonVariables
     }
     public enum PlayerAnimBools
     {
-        Run,
+        Idle,
+        Run
     }
 }
