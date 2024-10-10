@@ -44,7 +44,7 @@ public class EnemyBase : StateMachineBase
     {
         InitialState = new InitialState(this, enemyAnimator);
         ChaseState = new ChaseState(enemyAnimator, navMeshAgent, playerTransform, this);
-        AttackState = new AttackState();
+        AttackState = new AttackState(rb,enemyAnimator,navMeshAgent,this,playerTransform);
     }
     #endregion
     #region Public Methods
