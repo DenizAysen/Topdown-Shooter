@@ -6417,6 +6417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e4915486b733045add2e9eaaba4c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: {fileID: 11400000, guid: 0b1d6548b19db8f4b8ded06beae1a0d6, type: 2}
+  gunPoint: {fileID: 3411366259715068879}
 --- !u!1 &4792413734917740068
 GameObject:
   m_ObjectHideFlags: 0
@@ -8633,14 +8635,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6751513936238711456}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.60127217, y: 0.048551142, z: -0.1083349, w: 0.790176}
+  m_LocalRotation: {x: -0.67825425, y: 0.032073796, z: -0.23726745, w: 0.69472784}
   m_LocalPosition: {x: 0.05, y: 0.045, z: 0.057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5443904277713605969}
   m_Father: {fileID: 1105431773025856684}
-  m_LocalEulerAnglesHint: {x: -70.002, y: 37.25, z: -42.17}
+  m_LocalEulerAnglesHint: {x: -68, y: 78, z: -95}
 --- !u!1 &6787466460105396439
 GameObject:
   m_ObjectHideFlags: 0

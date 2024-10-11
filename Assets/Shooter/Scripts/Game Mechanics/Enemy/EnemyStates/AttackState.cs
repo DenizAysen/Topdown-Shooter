@@ -10,13 +10,20 @@ public class AttackState : IState
     private EnemyBase _enemyBase;
     private Transform _playerTransform;
     private Rigidbody _rigidbody;
-    public AttackState(Rigidbody rigidbody, Animator enemyAnimator, NavMeshAgent navMeshAgent,EnemyBase enemyBase, Transform playerTransform)
+    private EnemyTypes _enemyType;
+    private Transform _gunPoint;
+    private TimeCounter _timeCounter;
+    public AttackState(Rigidbody rigidbody, Animator enemyAnimator, NavMeshAgent navMeshAgent,EnemyBase enemyBase, Transform playerTransform, 
+        EnemyTypes enemyType, Transform gunPoint)
     {
         _rigidbody = rigidbody;
         _enemyAnimator = enemyAnimator;
         _navMeshAgent = navMeshAgent;
         _enemyBase = enemyBase;
         _playerTransform = playerTransform;
+        _enemyType = enemyType;
+        _gunPoint = gunPoint;
+        _timeCounter = new TimeCounter(_enemyType.ShootRate);
     }
     public void Enter()
     {
@@ -36,7 +43,7 @@ public class AttackState : IState
 
     public void Tick()
     {
-        if (Vector3.Distance(_enemyBase.transform.position, _playerTransform.position) > 10f)
+        if (Vector3.Distance(_enemyBase.transform.position, _playerTransform.position) > _enemyType.ShootRange)
         {
             _enemyBase.ChangeState(_enemyBase.ChaseState);
         }
@@ -44,7 +51,14 @@ public class AttackState : IState
         {
             StopEnemyMove();
             _enemyBase.transform.LookAt(_playerTransform);
+            //_gunPoint.LookAt(_playerTransform);
             _enemyBase.transform.eulerAngles = new Vector3(0,_enemyBase.transform.eulerAngles.y,0);
+            if (_timeCounter.IsThickFinished(Time.deltaTime))
+            {
+                var bullet = CreateGameObjects.Instance.CreateGameObject("Bullet", _gunPoint.position, null);
+                bullet.GetComponent<BulletBase>().InitBullet(_enemyType.HitDamage, _gunPoint);
+            }
+            
         }
     }
     #region Private Methods

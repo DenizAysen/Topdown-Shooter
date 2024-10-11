@@ -6,8 +6,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody), typeof(Animator), typeof(NavMeshAgent))]
 public class EnemyBase : StateMachineBase
 {
-	#region Unity Fields
-
+    #region Unity Fields
+    [SerializeField] private EnemyTypes enemyType;
+    [SerializeField] private Transform gunPoint;
 	#endregion
 	#region Fields
 	protected Rigidbody rb;
@@ -34,6 +35,7 @@ public class EnemyBase : StateMachineBase
             Debug.LogError("There is no player");
             return;
         }
+        navMeshAgent.speed = enemyType.MoveSpeed;
         playerTransform = FindObjectOfType<Player>().transform;
         InitStates();
         ChangeState(InitialState);
@@ -44,7 +46,7 @@ public class EnemyBase : StateMachineBase
     {
         InitialState = new InitialState(this, enemyAnimator);
         ChaseState = new ChaseState(enemyAnimator, navMeshAgent, playerTransform, this);
-        AttackState = new AttackState(rb,enemyAnimator,navMeshAgent,this,playerTransform);
+        AttackState = new AttackState(rb,enemyAnimator,navMeshAgent,this,playerTransform,enemyType,gunPoint);
     }
     #endregion
     #region Public Methods

@@ -23,7 +23,7 @@ public class BulletBase : MonoBehaviour
         if (_shooterObject == null)
             return;
 
-        transform.position += _shooterObject.forward * Time.fixedDeltaTime * .1f * bulletSpeed;
+        transform.position += _shooterObject.forward * Time.deltaTime * bulletSpeed;
     }
     #endregion
     #region Private Methods
