@@ -10,13 +10,15 @@ public class ChaseState : IState
     private NavMeshAgent navMeshAgent;
     private Transform playerTransform;
     private EnemyBase enemyBase;
+    private EnemyTypes enemyType;
     #endregion
-    public ChaseState(Animator animator, NavMeshAgent navMeshAgent, Transform playerTransform, EnemyBase enemyBase)
+    public ChaseState(Animator animator, NavMeshAgent navMeshAgent, Transform playerTransform, EnemyBase enemyBase, EnemyTypes enemyType)
     {
         enemyAnimator = animator;
         this.navMeshAgent = navMeshAgent;
         this.playerTransform = playerTransform;
         this.enemyBase = enemyBase;
+        this.enemyType = enemyType;
     }
     public void Enter()
     {
@@ -36,10 +38,16 @@ public class ChaseState : IState
 
     public void Tick()
     {
-        if(Vector3.Distance(enemyBase.transform.position,playerTransform.position) < 10f)
+        if (enemyBase.IsDead)
+        {
+            return;
+        }
+
+        if(Vector3.Distance(enemyBase.transform.position,playerTransform.position) < enemyType.ShootRange)
         {
             enemyBase.ChangeState(enemyBase.AttackState);
         }
+
         else
         {
             navMeshAgent.SetDestination(playerTransform.position);
