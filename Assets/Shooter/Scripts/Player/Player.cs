@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     {
         PlayerHealth.onPlayerDied += OnPlayerDied;
         PlayerCollector.onFinished += OnFinished;
+        Debug.Log("Calisti 1");
     }
     private void OnDisable()
     {
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
     {
         isControlEnabled = false;
         isPlayedDead = true;
+        Debug.Log($"Control enabled state : {isControlEnabled}");
     }
     private void OnFinished()
     {

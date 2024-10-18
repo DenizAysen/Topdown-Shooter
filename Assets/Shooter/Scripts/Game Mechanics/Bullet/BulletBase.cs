@@ -11,7 +11,9 @@ public class BulletBase : MonoBehaviour
     #endregion
     #region Fields
     private float _bulletDamage;
-    private Transform _shooterObject;
+
+    private Vector3 _shootPoint;
+    private Transform _sourceObject;
     #endregion
     #region Unity Methods
     private void OnEnable()
@@ -20,10 +22,10 @@ public class BulletBase : MonoBehaviour
     }
     private void Update()
     {
-        if (_shooterObject == null)
+        if (_shootPoint == null)
             return;
 
-        transform.position += _shooterObject.forward * Time.deltaTime * bulletSpeed;
+        transform.position += _shootPoint * Time.deltaTime * bulletSpeed;
     }
     #endregion
     #region Private Methods
@@ -34,16 +36,29 @@ public class BulletBase : MonoBehaviour
     }
     #endregion
     #region Public Methods
-    public void InitBullet(float bulletDamage, Transform shooterObject)
+    public void InitBullet(float bulletDamage, Transform gunPoint, Transform sourceObject)
     {
         _bulletDamage = bulletDamage;
-        _shooterObject = shooterObject;
+        _shootPoint = gunPoint.forward;
+        _sourceObject = sourceObject;
     }
     #endregion
-    #region On Trigger
-    private void OnTriggerEnter(Collider other)
+    //#region On Trigger
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.gameObject.TryGetComponent<IDamageable>(out var damageable))
+    //    {
+    //        damageable.TakeDamage(_bulletDamage);
+    //        gameObject.SetActive(false);
+    //    }
+    //}
+    //#endregion
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if ((_sourceObject!=collision.gameObject) && collision.gameObject.TryGetComponent<IDamageable>(out var damageable))
+        {
+            damageable.TakeDamage(_bulletDamage);
+            gameObject.SetActive(false);
+        }
     }
-    #endregion
 }

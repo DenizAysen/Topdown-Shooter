@@ -21,12 +21,12 @@ public static class CommonVariables
     public enum PlayerAnimsTriggers
     {
         Hit,
-        Die,
     }
     public enum PlayerAnimBools
     {
         Idle,
         Run,
-        Shooting
+        Shooting,
+        Die
     }
 }

@@ -6625,6 +6625,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4605024689629894, guid: 92c4112ee51924f42b69ff579ab762bd, type: 3}
   m_PrefabInstance: {fileID: 741712372}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &746877096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4782239892886556515, guid: b21c34fcf3882db41a8d19c321aa3251, type: 3}
+  m_PrefabInstance: {fileID: 1779529467912749798}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &747169260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10264,6 +10269,7 @@ GameObject:
   - component: {fileID: 1292766333}
   - component: {fileID: 1292766332}
   - component: {fileID: 1292766331}
+  - component: {fileID: 1292766334}
   m_Layer: 5
   m_Name: Fire Button
   m_TagString: Untagged
@@ -10334,7 +10340,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1292766332}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1292766329}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1292766332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10373,6 +10391,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292766329}
   m_CullTransparentMesh: 1
+--- !u!114 &1292766334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292766329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3383047f5b204e64d959b5d00baec4c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1295991088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12612,7 +12642,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.589
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -17023,6 +17053,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 416396401938606200, guid: b21c34fcf3882db41a8d19c321aa3251, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1392150025628469669, guid: b21c34fcf3882db41a8d19c321aa3251, type: 3}
       propertyPath: healtBar
       value: 
@@ -17103,19 +17137,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8535042100422015348, guid: b21c34fcf3882db41a8d19c321aa3251, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6290300432628406871, guid: b21c34fcf3882db41a8d19c321aa3251, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1008563305}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4782239892886556515, guid: b21c34fcf3882db41a8d19c321aa3251, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1779529467912749804}
   m_SourcePrefab: {fileID: 100100000, guid: b21c34fcf3882db41a8d19c321aa3251, type: 3}
 --- !u!4 &1779529467912749799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6290300432628406871, guid: b21c34fcf3882db41a8d19c321aa3251, type: 3}
   m_PrefabInstance: {fileID: 1779529467912749798}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &1779529467912749804
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746877096}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.19776209
+  m_Height: 1.8258095
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9123498, z: 0}
 --- !u!1001 &5293891396698897488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17130,7 +17194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 423984912065025358, guid: b1c2c71e4e38e1c4881b36d0c518e5d9, type: 3}
       propertyPath: turnSpeed
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 423984912065025358, guid: b1c2c71e4e38e1c4881b36d0c518e5d9, type: 3}
       propertyPath: gameJoystick
@@ -17197,6 +17261,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7999584250617537330, guid: b1c2c71e4e38e1c4881b36d0c518e5d9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5293891396698897491}
+    - targetCorrespondingSourceObject: {fileID: 7999584250617537330, guid: b1c2c71e4e38e1c4881b36d0c518e5d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5293891396698897492}
   m_SourcePrefab: {fileID: 100100000, guid: b1c2c71e4e38e1c4881b36d0c518e5d9, type: 3}
 --- !u!4 &5293891396698897489 stripped
 Transform:
@@ -17221,9 +17288,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMaxHealth: 100
+  bulletDamage: 40
   playerShootTimeOut: 1
   playerHealthImage: {fileID: 1632682740}
   gunPoint: {fileID: 128140958}
+--- !u!114 &5293891396698897492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293891396698897490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7743fcdfa0311da428b7cbb29e50e680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  playerHealthImage: {fileID: 1632682740}
 --- !u!1001 &7037482324045834818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17232,10 +17314,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7498675741945015505, guid: 0c1e1ee25915a45429c5acd2940183a8, type: 3}
-      propertyPath: bulletSpeed
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 850462002798152750, guid: 0c1e1ee25915a45429c5acd2940183a8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

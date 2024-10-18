@@ -90,6 +90,13 @@ public class EnemyBase : StateMachineBase, IDamageable
             navMeshAgent.ResetPath();
             navMeshAgent.isStopped = true;
             IsDead = true;
+            enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Shooting.ToString(), false);
+            enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Die.ToString(), true);
+            Debug.Log("dusman oldu");
+        }
+        else if (CurrentHealth > 0)
+        {
+            enemyAnimator.SetTrigger(CommonVariables.PlayerAnimsTriggers.Hit.ToString());
         }
     }
     #endregion

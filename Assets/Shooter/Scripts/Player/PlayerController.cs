@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class PlayerController : Player
     #endregion
     #region Fields
     Vector3 _moveDirection;
+    bool _canMove = true;
     #endregion
     #region Unity Methods
     protected override void Start()
@@ -18,6 +20,7 @@ public class PlayerController : Player
         base.Start();
         isPlayedDead = false;
         isControlEnabled = true;
+        ButtonHold.onPressedFire += SetMove;
     }
     private void FixedUpdate()
     {
@@ -39,8 +42,12 @@ public class PlayerController : Player
 
         transform.Rotate(0, gameJoystick.Direction.x * turnSpeed * Time.deltaTime, 0);
         Vector3 movement = new Vector3(gameJoystick.Direction.x, 0, gameJoystick.Direction.y);
-        movement = transform.TransformDirection(movement) * moveSpeed;
-        rb.AddForce(movement, ForceMode.Acceleration);
+        if (_canMove)
+        {
+            movement = transform.TransformDirection(movement) * moveSpeed;
+            rb.AddForce(movement, ForceMode.Acceleration);
+        }       
     }
     #endregion
+    private void SetMove(bool isShooting) => _canMove = !isShooting;
 }

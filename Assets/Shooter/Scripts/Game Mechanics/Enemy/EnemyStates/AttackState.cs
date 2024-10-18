@@ -56,7 +56,7 @@ public class AttackState : IState
             if (_timeCounter.IsThickFinished(Time.deltaTime))
             {
                 var bullet = CreateGameObjects.Instance.CreateGameObject("Bullet", _gunPoint.position, null);
-                bullet.GetComponent<BulletBase>().InitBullet(_enemyType.HitDamage, _gunPoint);
+                bullet.GetComponent<BulletBase>().InitBullet(_enemyType.HitDamage, _gunPoint, _enemyBase.transform);
             }
             
         }

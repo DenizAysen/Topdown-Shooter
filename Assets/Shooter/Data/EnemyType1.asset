@@ -16,7 +16,7 @@ MonoBehaviour:
   MoveSpeed: 4.5
   TurnSpeed: 120
   ShootRange: 10
-  ShootRate: 0.5
+  ShootRate: 1
   HitDamage: 30
   Health: 100
   EnemyColor: {r: 1, g: 0, b: 0, a: 1}
