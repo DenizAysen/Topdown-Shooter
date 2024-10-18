@@ -92,7 +92,7 @@ public class EnemyBase : StateMachineBase, IDamageable
             IsDead = true;
             enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Shooting.ToString(), false);
             enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Die.ToString(), true);
-            Debug.Log("dusman oldu");
+            this.enabled = false;
         }
         else if (CurrentHealth > 0)
         {

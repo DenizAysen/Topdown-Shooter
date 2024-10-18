@@ -12,6 +12,7 @@ public class PlayerHealth : Player, IDamageable
     #endregion
     #region Fields
     float _currentHealth;
+    private int _unusedObjectLayer = 6;
     #endregion
     public static Action onPlayerDied;
     public static Action onTakeDamage;
@@ -59,6 +60,7 @@ public class PlayerHealth : Player, IDamageable
             animator.SetBool(CommonVariables.PlayerAnimBools.Shooting.ToString(), false);
             animator.SetBool(CommonVariables.PlayerAnimBools.Die.ToString(),true);
             IsDead = true;
+            gameObject.layer = _unusedObjectLayer;
             onPlayerDied?.Invoke();
         }
         else

@@ -43,22 +43,23 @@ public class BulletBase : MonoBehaviour
         _sourceObject = sourceObject;
     }
     #endregion
-    //#region On Trigger
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.gameObject.TryGetComponent<IDamageable>(out var damageable))
-    //    {
-    //        damageable.TakeDamage(_bulletDamage);
-    //        gameObject.SetActive(false);
-    //    }
-    //}
-    //#endregion
-    private void OnCollisionEnter(Collision collision)
+    #region On Trigger
+    private void OnTriggerEnter(Collider other)
     {
-        if ((_sourceObject!=collision.gameObject) && collision.gameObject.TryGetComponent<IDamageable>(out var damageable))
+        Debug.Log(_sourceObject.name +" "+other.gameObject.name);
+        if ((_sourceObject.gameObject != other.gameObject) && other.gameObject.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.TakeDamage(_bulletDamage);
             gameObject.SetActive(false);
         }
     }
+    #endregion
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if ((_sourceObject!=collision.gameObject) && collision.gameObject.TryGetComponent<IDamageable>(out var damageable))
+    //    {
+    //        damageable.TakeDamage(_bulletDamage);
+    //        gameObject.SetActive(false);
+    //    }
+    //}
 }
