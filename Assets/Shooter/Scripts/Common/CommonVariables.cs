@@ -29,4 +29,10 @@ public static class CommonVariables
         Shooting,
         Die
     }
+    public enum CollectableType
+    {
+        GunUpgrade,
+        Health,
+
+    }
 }
