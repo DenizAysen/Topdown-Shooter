@@ -18,13 +18,18 @@ public class EnemyBase : StateMachineBase, IDamageable
 	protected NavMeshAgent navMeshAgent;
 	protected Animator enemyAnimator;
 	protected Transform playerTransform;
-    public float CurrentHealth { get ; set; }
-    public bool IsDead {  get; set; }
+    #endregion
+    #region Properties
+    public float CurrentHealth { get; set; }
+    public bool IsDead { get; set; } 
     #endregion
     #region States
     public InitialState InitialState { get; private set; }
     public ChaseState ChaseState {  get; private set; }
     public AttackState AttackState { get; private set; }
+    #endregion
+    #region Actions
+    public static Action<Vector3> onEnemyKilled;
     #endregion
     #region Unity Methods
     private void Awake()
@@ -81,12 +86,16 @@ public class EnemyBase : StateMachineBase, IDamageable
         healtBar.fillAmount = CurrentHealth / enemyType.Health;
         if(CurrentHealth <= 0)
         {
-            navMeshAgent.ResetPath();
-            navMeshAgent.isStopped = true;
-            IsDead = true;
-            enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Shooting.ToString(), false);
-            enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Die.ToString(), true);
-            this.enabled = false;
+            if (!IsDead)
+            {
+                IsDead = true;
+                navMeshAgent.ResetPath();
+                navMeshAgent.isStopped = true;
+                enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Shooting.ToString(), false);
+                enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Die.ToString(), true);
+                onEnemyKilled?.Invoke(transform.position);
+                this.enabled = false;
+            }          
         }
         else if (CurrentHealth > 0)
         {

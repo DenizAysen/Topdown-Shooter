@@ -46,7 +46,7 @@ public class BulletBase : MonoBehaviour
     #region On Trigger
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(_sourceObject.name +" "+other.gameObject.name);
+        //Debug.Log(_sourceObject.name +" "+other.gameObject.name);
         if ((_sourceObject.gameObject != other.gameObject) && other.gameObject.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.TakeDamage(_bulletDamage);
