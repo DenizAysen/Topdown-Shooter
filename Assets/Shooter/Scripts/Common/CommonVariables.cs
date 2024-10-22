@@ -7,6 +7,7 @@ public static class CommonVariables
 {
     public enum SpawnedObjects
     {
+        Bullet,
         Barrier,
         Coin,
         CollectedParticle

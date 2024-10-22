@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,11 +14,13 @@ public class PlayerShooter : Player //, IDamageable
     [SerializeField] private float playerShootTimeOut = 1f;
 	[SerializeField] Image playerHealthImage;
 	[SerializeField] Transform gunPoint;
+    [SerializeField] List<PlayerGunUpgrade> gunUpgrades;
     #endregion
     #region Fields
     TimeCounter _timeCounter;
     private bool _isShootPressed;
     #endregion
+    public int CurrentGunLevel { get; private set; }
     //#region Properties
     //public bool IsDead { get; set; }
     //public float CurrentHealth { get; set; }
@@ -37,6 +40,7 @@ public class PlayerShooter : Player //, IDamageable
         isControlEnabled = true;
         _timeCounter = new TimeCounter(playerShootTimeOut);
         ButtonHold.onPressedFire += SetShoot;
+        CurrentGunLevel = 1;
     }
     private void OnEnable()
     {
@@ -88,14 +92,32 @@ public class PlayerShooter : Player //, IDamageable
         }
 
     }
-
     private void ShootBullet()
     {
         animator.SetBool(CommonVariables.PlayerAnimBools.Shooting.ToString(), true);
-        GameObject bullet = CreateGameObjects.Instance.CreateGameObject("Bullet", gunPoint.position,null);
-        bullet.GetComponent<BulletBase>().InitBullet(bulletDamage, gunPoint, transform);
+        var currentGunLevelDetails = gunUpgrades.Where(x => x.Gunlevel == CurrentGunLevel).FirstOrDefault();
+        Shoot(currentGunLevelDetails.shootPoints);
+    }
+    private void Shoot(Transform[] shootPoints)
+    {
+        foreach (var item in shootPoints)
+        {
+            GameObject bullet = CreateGameObjects.Instance.CreateGameObject(CommonVariables.SpawnedObjects.Bullet.ToString(), item.position, null);
+            bullet.GetComponent<BulletBase>().InitBullet(bulletDamage, item, transform);
+        }
     }
     private void OnTakeDamage() => _timeCounter = new TimeCounter(playerShootTimeOut);
     private void OnPlayerDied() => _isShootPressed  = false;
+    #endregion
+    #region Public Methods
+    public bool TakeGunUpgrade()
+    {
+        if(CurrentGunLevel < 3)
+        {
+            CurrentGunLevel++;
+            return true;
+        }
+        return false;
+    }
     #endregion
 }

@@ -30,13 +30,11 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.onPlayerDied += OnPlayerDied;
-        PlayerCollector.onFinished += OnFinished;
         Debug.Log("Calisti 1");
     }
     private void OnDisable()
     {
         PlayerHealth.onPlayerDied -= OnPlayerDied;
-        PlayerCollector.onFinished -= OnFinished;
     }
     #endregion
     #region Privates
@@ -55,12 +53,6 @@ public class Player : MonoBehaviour
         isControlEnabled = false;
         isPlayedDead = true;
         Debug.Log($"Control enabled state : {isControlEnabled}");
-    }
-    private void OnFinished()
-    {
-        isControlEnabled = false;
-        //Debug.Log("Control enabled : " + isControlEnabled);
-        animator.SetBool(CommonVariables.PlayerAnimBools.Run.ToString(), false);
     }
     #endregion
 }

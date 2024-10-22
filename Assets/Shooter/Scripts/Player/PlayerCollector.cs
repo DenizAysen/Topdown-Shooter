@@ -2,27 +2,59 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CommonVariables;
 
+[RequireComponent(typeof(PlayerHealth),typeof(PlayerShooter))]
 public class PlayerCollector : MonoBehaviour
 {
-    private readonly string _finish = "Finish";
-    #region Actions
-    public static Action onFinished; 
+    #region Fields
+    private PlayerHealth _playerHealth;
+    private PlayerShooter _playerShooter;
     #endregion
-    private void OnCollisionEnter(Collision collision)
+    #region Unity Methods
+    private void Awake()
     {
-        //if(collision.gameObject.TryGetComponent<ICollectible>(out var colletible))
-        //{
-        //    colletible.Collected();
-        //}
-        //if(collision.gameObject.TryGetComponent<IObstacle>(out var obstacle))
-        //{
-        //    obstacle.Hit();
-        //}
+        _playerHealth = GetComponent<PlayerHealth>();
+        _playerShooter = GetComponent<PlayerShooter>();
     }
+    #endregion
+    #region OnTrigger
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(_finish))
-            onFinished?.Invoke();
+        if (other.gameObject.TryGetComponent<ICollectable>(out var collectItem))
+        {
+            switch (collectItem.ItemType)
+            {
+                case CollectableType.GunUpgrade:
+                    GunUpgrade(collectItem);
+                    break;
+
+                case CollectableType.Health:
+                    CollectHealth(collectItem);
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
+    #endregion
+    #region Private Methods
+    void GunUpgrade(ICollectable collectItem)
+    {
+        bool collectionSuccess = _playerShooter.TakeGunUpgrade();
+        if (collectionSuccess)
+        {
+            collectItem.Collected();
+        }
+    }
+    void CollectHealth(ICollectable collectHealth)
+    {
+        bool collectionSuccess = _playerHealth.TakeHealth(20);
+        if (collectionSuccess)
+        {
+            collectHealth.Collected();
+        }
+    }
+    #endregion
 }

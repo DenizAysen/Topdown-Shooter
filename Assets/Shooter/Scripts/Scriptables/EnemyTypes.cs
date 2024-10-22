@@ -10,6 +10,7 @@ public class EnemyTypes : ScriptableObject
     public float TurnSpeed;
     public float ShootRange;
     public float ShootRate;
+    public float ChaseRange;
     public float HitDamage;
     public float Health;
     public Color EnemyColor;

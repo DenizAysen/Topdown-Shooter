@@ -48,7 +48,6 @@ public class PlayerHealth : Player, IDamageable
     #region Public Methods
     public float GetMaxHealth() => maxHealth;
     public float GetCurrentHealth() => CurrentHealth;
-
     public void TakeDamage(float damage)
     {
         if (IsDead) return;
@@ -68,6 +67,16 @@ public class PlayerHealth : Player, IDamageable
             animator.SetTrigger(CommonVariables.PlayerAnimsTriggers.Hit.ToString());
             onTakeDamage?.Invoke();
         }
+    }
+    public bool TakeHealth(float healthValue)
+    {
+        if(CurrentHealth == maxHealth)
+        {
+            return false;
+        }
+        CurrentHealth += healthValue;
+        playerHealthImage.fillAmount = CurrentHealth / maxHealth;
+        return true;
     }
     #endregion
 }

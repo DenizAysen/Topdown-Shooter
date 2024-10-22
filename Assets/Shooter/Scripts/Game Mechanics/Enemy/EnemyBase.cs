@@ -45,7 +45,6 @@ public class EnemyBase : StateMachineBase, IDamageable
         playerTransform = FindObjectOfType<Player>().transform;
         InitStates();
         ChangeState(InitialState);
-        StartCoroutine(AutoChase());
     }
     //private void Update()
     //{
@@ -60,14 +59,9 @@ public class EnemyBase : StateMachineBase, IDamageable
     #region Private Methods
     private void InitStates()
     {
-        InitialState = new InitialState(this, enemyAnimator);
+        InitialState = new InitialState(this, enemyType, enemyAnimator, playerTransform);
         ChaseState = new ChaseState(enemyAnimator, navMeshAgent, playerTransform, this, enemyType);
         AttackState = new AttackState(rb,enemyAnimator,navMeshAgent,this,playerTransform,enemyType,gunPoint);
-    }
-    private IEnumerator AutoChase()
-    {
-        yield return new WaitForSeconds(1);
-        StartChase();
     }
     #endregion
     #region Public Methods
