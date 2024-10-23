@@ -8,7 +8,6 @@ public class SuccessPanel : PanelBase
 {
     #region Unity Fields
     [SerializeField] TextMeshProUGUI finalScoreText;
-    [SerializeField] TextMeshProUGUI currentScoreText;
     #endregion
     #region Unity Methods
     private void Start()
@@ -30,7 +29,7 @@ public class SuccessPanel : PanelBase
     #region Private Methods
     private void SetFinalScore()
     {
-        finalScoreText.text = currentScoreText.text;
+        finalScoreText.text = finalScoreText.text;
     } 
     #endregion
 }

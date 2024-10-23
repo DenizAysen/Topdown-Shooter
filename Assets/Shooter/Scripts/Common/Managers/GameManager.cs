@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : SingletonCreator<GameManager>
@@ -9,6 +10,14 @@ public class GameManager : SingletonCreator<GameManager>
     PlayerHealth _playerHealth;
     #endregion
     #region Unity Fields
+    [Header("Panels")]
+    [SerializeField] PanelBase inGamePanel;
+    [SerializeField] PanelBase startPanel;
+    [SerializeField] PanelBase failedPanel;
+    [SerializeField] PanelBase successPanel;
+    [SerializeField] TextMeshProUGUI inGameScoreText;
+    [SerializeField] int scorePerKill = 50;
+    [Header("Collectable Settings")]
     [SerializeField] float bonusYOffset;
     [SerializeField] List<CollectableBase> collectableItems;
     #endregion
@@ -19,6 +28,8 @@ public class GameManager : SingletonCreator<GameManager>
     }
     private void Start()
     {
+        DisableAllPanels();
+        startPanel.gameObject.SetActive(true);
         _playerHealth = FindObjectOfType<PlayerHealth>();
         if (_playerHealth == null)
             Debug.LogError("No player in game");
@@ -29,6 +40,13 @@ public class GameManager : SingletonCreator<GameManager>
     }
     #endregion
     #region Private Methods
+    private void DisableAllPanels()
+    {
+        inGamePanel.gameObject.SetActive(false);
+        startPanel.gameObject.SetActive(false);
+        failedPanel.gameObject.SetActive(false);
+        successPanel.gameObject.SetActive(false);
+    }
     private void OnEnemyKilled(Vector3 killedPos)
     {
         CreateRandomBonus(killedPos);
@@ -48,6 +66,13 @@ public class GameManager : SingletonCreator<GameManager>
         var bonusObject = Instantiate(itemToCreate, null);
         bonusPos.y += bonusYOffset;
         bonusObject.transform.position = bonusPos;
+    }
+    #endregion
+    #region Public Methods
+    public void StartGame()
+    {
+        DisableAllPanels();
+        inGamePanel.gameObject.SetActive(true);
     }
     #endregion
 }
