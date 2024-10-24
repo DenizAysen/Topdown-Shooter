@@ -39,7 +39,6 @@ public class PlayerShooter : Player //, IDamageable
         base.Awake();
         isControlEnabled = true;
         _timeCounter = new TimeCounter(playerShootTimeOut);
-        ButtonHold.onPressedFire += SetShoot;
         CurrentGunLevel = 1;
     }
     private void OnEnable()

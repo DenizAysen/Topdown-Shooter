@@ -48,6 +48,10 @@ public class PlayerController : Player
             rb.AddForce(movement, ForceMode.Acceleration);
         }       
     }
+    private void OnDisable()
+    {
+        ButtonHold.onPressedFire -= SetMove;
+    }
     #endregion
     private void SetMove(bool isShooting) => _canMove = !isShooting;
 }

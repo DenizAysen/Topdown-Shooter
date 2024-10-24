@@ -25,7 +25,6 @@ public static class CommonVariables
     }
     public enum PlayerAnimBools
     {
-        Idle,
         Run,
         Shooting,
         Die
@@ -34,6 +33,9 @@ public static class CommonVariables
     {
         GunUpgrade,
         Health,
-
+    }
+    public enum PlayerAnimState
+    {
+        Idle
     }
 }

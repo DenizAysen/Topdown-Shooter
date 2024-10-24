@@ -20,7 +20,8 @@ public class InitialState : IState
     public void Enter()
     {
         //Debug.Log("Enemy is at initial state");
-        enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Idle.ToString(), true);
+        //enemyAnimator.SetBool(CommonVariables.PlayerAnimBools.Idle.ToString(), true);
+        enemyAnimator.Play("Idle");
     }
 
     public void Exit()

@@ -39,6 +39,10 @@ public class EnemyBase : StateMachineBase, IDamageable
         enemyAnimator = GetComponent<Animator>();
         CurrentHealth = enemyType.Health;
     }
+    private void OnEnable()
+    {
+        PlayerHealth.onPlayerDied += OnPlayerDied;
+    }
     private void Start()
     {
         if (FindObjectOfType<Player>() == null)
@@ -51,6 +55,10 @@ public class EnemyBase : StateMachineBase, IDamageable
         InitStates();
         ChangeState(InitialState);
     }
+    private void OnDisable()
+    {
+        PlayerHealth.onPlayerDied -= OnPlayerDied;
+    }
     //private void Update()
     //{
     //    if (_isDead)
@@ -62,6 +70,10 @@ public class EnemyBase : StateMachineBase, IDamageable
     //}
     #endregion
     #region Private Methods
+    private void OnPlayerDied()
+    {
+        this.enabled = false;
+    }
     private void InitStates()
     {
         InitialState = new InitialState(this, enemyType, enemyAnimator, playerTransform);

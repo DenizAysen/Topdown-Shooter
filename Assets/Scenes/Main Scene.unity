@@ -1428,6 +1428,7 @@ MonoBehaviour:
   failedPanel: {fileID: 470058325}
   successPanel: {fileID: 1115678064}
   inGameScoreText: {fileID: 414779792}
+  finalGameScoreText: {fileID: 1820887964}
   scorePerKill: 50
   bonusYOffset: 2
   collectableItems:
@@ -10172,7 +10173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08dc23d46862fb440a3dac2f84471364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalScoreText: {fileID: 0}
 --- !u!1 &1134585990
 GameObject:
   m_ObjectHideFlags: 0
@@ -10255,7 +10255,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1134585993}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 169222586}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1134585993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15806,7 +15818,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1804784225}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 169222586}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1804784225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16047,7 +16071,7 @@ GameObject:
   - component: {fileID: 1820887965}
   - component: {fileID: 1820887964}
   m_Layer: 5
-  m_Name: 'Score Text '
+  m_Name: 'Final Score Text '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16418,7 +16442,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1832071391}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 169222586}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: LoadNextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1832071391
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CommonVariables;
 /// <summary>
 /// Keeps players basic properties
 /// </summary>
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     {
         isControlEnabled = false;
         isPlayedDead = false;
+        //animator = GetComponent<Animator>();
     }
     protected virtual void Start()
     {
@@ -30,18 +32,15 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.onPlayerDied += OnPlayerDied;
-        Debug.Log("Calisti 1");
+        GameManager.onGameFinished += OnGameFinished;
     }
     private void OnDisable()
     {
         PlayerHealth.onPlayerDied -= OnPlayerDied;
+        GameManager.onGameFinished -= OnGameFinished;
     }
     #endregion
     #region Privates
-    private void OnHit(float damage)
-    {
-        
-    }
     private void OnStartGame()
     {
         isControlEnabled = true;
@@ -54,5 +53,14 @@ public class Player : MonoBehaviour
         isPlayedDead = true;
         Debug.Log($"Control enabled state : {isControlEnabled}");
     }
+
+    private void OnGameFinished()
+    {
+        isControlEnabled = false;
+        animator.SetBool(PlayerAnimBools.Run.ToString(), false);
+        animator.SetBool(PlayerAnimBools.Shooting.ToString(), false);
+        animator.Play(PlayerAnimState.Idle.ToString());
+    }
+
     #endregion
 }
