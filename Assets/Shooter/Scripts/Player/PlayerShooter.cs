@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class PlayerShooter : Player //, IDamageable
 {
     #region Unity Fields
-    [SerializeField] private float playerMaxHealth = 100f;
     [SerializeField] private float bulletDamage = 40f;
     [SerializeField] private float playerShootTimeOut = 1f;
 	[SerializeField] Image playerHealthImage;
@@ -41,22 +40,25 @@ public class PlayerShooter : Player //, IDamageable
         _timeCounter = new TimeCounter(playerShootTimeOut);
         CurrentGunLevel = 1;
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         ButtonHold.onPressedFire += SetShoot;
         PlayerHealth.onTakeDamage += OnTakeDamage;
         PlayerHealth.onPlayerDied += OnPlayerDied;
+        GameManager.onGameFinished += OnGameFinished;
     }
     protected override void Start()
     {
         base.Start();
-        //CurrentHealth = playerMaxHealth;
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         ButtonHold.onPressedFire -= SetShoot;
         PlayerHealth.onTakeDamage -= OnTakeDamage;
         PlayerHealth.onPlayerDied -= OnPlayerDied;
+        GameManager.onGameFinished -= OnGameFinished;
     }
     private void Update()
     {
@@ -79,7 +81,7 @@ public class PlayerShooter : Player //, IDamageable
 
         if (!_isShootPressed && isShooting)
         {
-            ShootBullet();
+            PlayShootAnimation();
 
             _timeCounter = new TimeCounter(playerShootTimeOut);
         }
@@ -91,9 +93,9 @@ public class PlayerShooter : Player //, IDamageable
         }
 
     }
+    private void PlayShootAnimation() => animator.SetBool(CommonVariables.PlayerAnimBools.Shooting.ToString(), true);
     private void ShootBullet()
-    {
-        animator.SetBool(CommonVariables.PlayerAnimBools.Shooting.ToString(), true);
+    {       
         var currentGunLevelDetails = gunUpgrades.Where(x => x.Gunlevel == CurrentGunLevel).FirstOrDefault();
         Shoot(currentGunLevelDetails.shootPoints);
     }
@@ -107,6 +109,12 @@ public class PlayerShooter : Player //, IDamageable
     }
     private void OnTakeDamage() => _timeCounter = new TimeCounter(playerShootTimeOut);
     private void OnPlayerDied() => _isShootPressed  = false;
+    private void OnGameFinished()
+    {
+        _isShootPressed = false;
+        //animator.SetBool(CommonVariables.PlayerAnimBools.Shooting.ToString(), false);
+    }
+
     #endregion
     #region Public Methods
     public bool TakeGunUpgrade()

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf1461dca472974d976531673cf68b7, type: 3}
   m_Name: EnemyType2
   m_EditorClassIdentifier: 
-  EnemyName: 
-  MoveSpeed: 0
-  TurnSpeed: 0
-  HitDamage: 0
-  Health: 0
+  EnemyName: Enemy2
+  MoveSpeed: 4.5
+  TurnSpeed: 120
+  ShootRange: 5
+  ShootRate: 1.8
+  ChaseRange: 10
+  HitDamage: 40
+  Health: 100
+  EnemyColor: {r: 1, g: 0, b: 0, a: 1}

@@ -15,12 +15,16 @@ public class PlayerController : Player
     bool _canMove = true;
     #endregion
     #region Unity Methods
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        ButtonHold.onPressedFire += SetMove;
+    }
     protected override void Start()
     {
         base.Start();
         isPlayedDead = false;
         isControlEnabled = true;
-        ButtonHold.onPressedFire += SetMove;
     }
     private void FixedUpdate()
     {
@@ -45,11 +49,13 @@ public class PlayerController : Player
         if (_canMove)
         {
             movement = transform.TransformDirection(movement) * moveSpeed;
-            rb.AddForce(movement, ForceMode.Acceleration);
+            rb.velocity = movement;
+            //rb.AddForce(movement, ForceMode.Acceleration);
         }       
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         ButtonHold.onPressedFire -= SetMove;
     }
     #endregion

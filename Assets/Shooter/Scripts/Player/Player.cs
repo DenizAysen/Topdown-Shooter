@@ -29,12 +29,12 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         PlayerHealth.onPlayerDied += OnPlayerDied;
         GameManager.onGameFinished += OnGameFinished;
     }
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         PlayerHealth.onPlayerDied -= OnPlayerDied;
         GameManager.onGameFinished -= OnGameFinished;

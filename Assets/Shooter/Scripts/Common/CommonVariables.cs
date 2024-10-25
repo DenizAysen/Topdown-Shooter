@@ -36,6 +36,7 @@ public static class CommonVariables
     }
     public enum PlayerAnimState
     {
-        Idle
+        Idle,
+        Shooting
     }
 }

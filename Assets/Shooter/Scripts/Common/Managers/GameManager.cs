@@ -114,7 +114,8 @@ public class GameManager : SingletonCreator<GameManager>
     {
         int buildIndex = SceneManager.GetActiveScene().buildIndex;
         buildIndex++;
-        int sceneCount = SceneManager.sceneCount;
+
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
         if (buildIndex >= sceneCount)
         {
             buildIndex = 0;
